@@ -32,6 +32,7 @@
 //              - Olivier Girard,    olgirard@gmail.com
 //
 //----------------------------------------------------------------------------
+`timescale 1ns / 100ps
 `include "openmsp430/openMSP430_defines.v"
 
 module openMSP430_fpga (

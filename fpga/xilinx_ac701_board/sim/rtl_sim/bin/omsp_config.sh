@@ -1,4 +1,4 @@
-#include "../run/pmem.h"
+#include "../bin/pmem.h"
 
 pmemsize=PMEM_SIZE
 dmemsize=DMEM_SIZE

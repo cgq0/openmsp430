@@ -115,13 +115,18 @@ else
        if [ -d work ]; then  vdel -all; fi
        vlib work
        exec vlog +acc=prn -f $3 $vargs -R -c -do "run -all" ;;
-    isim )
-       # Xilinx simulator
-       rm -rf fuse* isim*
-       fuse tb_openMSP430 -prj $3 -o isim.exe -i ../../../bench/verilog/ -i ../../../rtl/verilog/ -i ../../../rtl/verilog/periph/
-       echo "run all" > isim.tcl
-       ./isim.exe -tclbatch isim.tcl
-       exit
+   isim )
+      # Vivado / XSIM
+      rm -rf xvlog* xelab* xsim* isim* *.wdb
+      # compile sources listed in submit file (add include dirs as needed)
+      xvlog -prj $3 -i ../../../bench/verilog/ -i ../../../rtl/verilog/openmsp430 -i ../../../rtl/verilog/openmsp430/periph/
+      if [ $? -ne 0 ]; then echo "ERROR: xvlog failed"; exit 1; fi
+      # elaborate top module
+      xelab --debug all -timescale 1ns/100ps glbl tb_openMSP430_fpga -s tb_openMSP430_fpga_sim
+      if [ $? -ne 0 ]; then echo "ERROR: xelab failed"; exit 1; fi
+      # run simulation (use -R to run and exit)
+      xsim tb_openMSP430_fpga_sim -R
+      exit
    esac
 
    echo "Running: $OMSP_SIMULATOR -f $3 $vargs"

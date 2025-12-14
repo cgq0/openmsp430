@@ -38,7 +38,7 @@
 #                            Parameter Check                                  #
 ###############################################################################
 EXPECTED_ARGS=1
-if [ $# -ne $EXPECTED_ARGS ]; then
+if [[ $# -ne $EXPECTED_ARGS ]]; then
   echo "ERROR    : wrong number of arguments"
   echo "USAGE    : msp430sim <test name>"
   echo "Example  : msp430sim leds"
@@ -65,7 +65,8 @@ softdir=../../../software/$1;
 elffile=../../../software/$1/$1.elf;
 verfile=../src/$1.v;
 submitfile=../src/submit.f;
-if [ $OMSP_SIMULATOR == "isim" ]; then
+
+if [[ $OMSP_SIMULATOR == "isim" ]]; then
     submitfile=../src/submit.prj;
 fi
 incfile=../../../rtl/verilog/openmsp430/openMSP430_defines.v;
@@ -158,5 +159,5 @@ echo "Convert IHEX file to Verilog MEMH format..."
 ../bin/ihex2mem.tcl -ihex pmem.ihex -out pmem.mem -mem_size $pmemsize
 
 # Start verilog simulation
-echo "Start Verilog simulation..."
+echo "Start Verilog simulation (simulator: $OMSP_SIMULATOR) ..."
 ../bin/rtlsim.sh    stimulus.v pmem.mem $submitfile
