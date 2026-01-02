@@ -40,18 +40,15 @@ fi
 ###############################################################################
 
 # Move to the XFLOW workspace
-cd ./WORK
+cd ./work
 
 # Copy PROM & bitstream in working directory
-cp -f ../bitstreams/$1.bit .
 cp -f ../bitstreams/$1.mcs .
 
-# Copy the impact script and update it
-cp ../scripts/impact_program_fpga.batch ./impact_program_fpga.batch
-sed -i "s/PROM_NAME/$1/g"  ./impact_program_fpga.batch
-
 # Program FPGA
-impact -batch ./impact_program_fpga.batch
+# program_flash is a tool provided by Xilinx Vitis above 2020.1
+# For older versions, please use the vivado hw_server and hw_client... etc.
+program_flash -f $1.mcs -flash_type qspi-x4-single -verify
 
 # Return to the root directory
 cd ../

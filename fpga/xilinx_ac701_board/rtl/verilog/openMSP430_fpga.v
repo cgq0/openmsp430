@@ -203,10 +203,6 @@ wire         [1:0] omsp0_pmem_wen;
 wire        [15:0] omsp1_pmem_din;
 wire         [1:0] omsp1_pmem_wen;
 (*mark_debug="true"*)  wire        [15:0] omsp1_pmem_dout;
-// Read-address counter for PMEM port B (used to sequentially read all contents)
-(*mark_debug="true"*) reg [`PMEM_MSB:0] pmem_read_addr_b;
-(*mark_debug="true"*) reg pmem_read_enb;
-
 // UART
 wire               omsp0_uart_rxd;
 wire               omsp0_uart_txd;
@@ -383,53 +379,53 @@ ram_16x1k_dp ram_16x1k_dp_dmem_shared (
 );
 
 // Shared Program Memory
-`define DEBUG_PMEM
-`ifndef DEBUG_PMEM
-ram_16x8k_dp ram_16x8k_dp_pmem_shared (
-    .clka           ( dco_clk),
-    .ena            (~omsp0_pmem_cen),
-    .wea            (~omsp0_pmem_wen),
-    .addra          ( omsp0_pmem_addr),
-    .dina           ( omsp0_pmem_din),
-    .douta          ( omsp0_pmem_dout),
-    .clkb           ( dco_clk),
-    .enb            (~omsp1_pmem_cen),
-    .web            (~omsp1_pmem_wen),
-    .addrb          ( omsp1_pmem_addr),
-    .dinb           ( omsp1_pmem_din),
-    .doutb          ( omsp1_pmem_dout)
-);
+//`define DEBUG_PMEM
+`ifdef DEBUG_PMEM
+    // Read-address counter for PMEM port B (used to sequentially read all contents)
+    (*mark_debug="true"*) reg [`PMEM_MSB:0] pmem_read_addr_b;
+    (*mark_debug="true"*) reg pmem_read_enb;
+    ram_16x8k_dp ram_16x8k_dp_pmem_shared (
+        .clka           ( dco_clk),
+        .ena            (~omsp0_pmem_cen),
+        .wea            (~omsp0_pmem_wen),    
+        .addra          ( omsp0_pmem_addr),
+        .dina           ( 16'haa55),
+        .douta          ( omsp0_pmem_dout),
+        .clkb           ( dco_clk),
+        .enb            ( pmem_read_enb ),
+        .web            ( 2'b00 ),
+        .addrb          ( pmem_read_addr_b ),
+        .dinb           ( 16'haa55),
+        .doutb          ( omsp1_pmem_dout)
+    );
+    // Generate an enable that pulses every other clock and increment address on that pulse
+    always @ (posedge dco_clk or posedge dco_rst)
+    begin
+        if (dco_rst) begin
+            pmem_read_addr_b <= {(`PMEM_MSB+1){1'b0}};
+            pmem_read_enb    <= 1'b0;
+        end
+        else begin
+            pmem_read_enb <= ~pmem_read_enb; // toggle: read every other clock
+            if (pmem_read_enb)
+                pmem_read_addr_b <= pmem_read_addr_b + 1'b1;
+        end
+    end
 `else
-
-ram_16x8k_dp ram_16x8k_dp_pmem_shared (
-    .clka           ( dco_clk),
-    .ena            (~omsp0_pmem_cen),
-    //.wea            (~omsp0_pmem_wen),
-    .wea            (2'b00),
-    .addra          ( omsp0_pmem_addr),
-    .dina           ( 16'haa55),
-    .douta          ( omsp0_pmem_dout),
-    .clkb           ( dco_clk),
-    .enb            ( pmem_read_enb ),
-    .web            ( 2'b00 ),
-    .addrb          ( pmem_read_addr_b ),
-    .dinb           ( 16'haa55),
-    .doutb          ( omsp1_pmem_dout)
-);
-
-// Generate an enable that pulses every other clock and increment address on that pulse
-always @ (posedge dco_clk or posedge dco_rst)
-begin
-    if (dco_rst) begin
-        pmem_read_addr_b <= {(`PMEM_MSB+1){1'b0}};
-        pmem_read_enb    <= 1'b0;
-    end
-    else begin
-        pmem_read_enb <= ~pmem_read_enb; // toggle: read every other clock
-        if (pmem_read_enb)
-            pmem_read_addr_b <= pmem_read_addr_b + 1'b1;
-    end
-end
+    ram_16x8k_dp ram_16x8k_dp_pmem_shared (
+        .clka           ( dco_clk),
+        .ena            (~omsp0_pmem_cen),
+        .wea            (~omsp0_pmem_wen),
+        .addra          ( omsp0_pmem_addr),
+        .dina           ( omsp0_pmem_din),
+        .douta          ( omsp0_pmem_dout),
+        .clkb           ( dco_clk),
+        .enb            (~omsp1_pmem_cen),
+        .web            (~omsp1_pmem_wen),
+        .addrb          ( omsp1_pmem_addr),
+        .dinb           ( omsp1_pmem_din),
+        .doutb          ( omsp1_pmem_dout)
+    );
 `endif
 
 
@@ -460,14 +456,15 @@ IBUF  SW0_PIN            (.O(omsp_switch[0]),        .I(GPIO_DIP1));
 //----------------------------------------------
 // User LEDs
 //----------------------------------------------
+/*
 reg[19:0] led_cnt;
 always @ (posedge dco_clk or posedge dco_rst)
     if (dco_rst)       led_cnt <=  10'h000;
     else               led_cnt <=  led_cnt + 10'h001;
-    
+*/    
 
-//OBUF  LED3_PIN           (.I(omsp1_led[1]),          .O(GPIO_LED4));
-OBUF  LED3_PIN           (.I(led_cnt[19]),          .O(GPIO_LED4));
+OBUF  LED3_PIN           (.I(omsp1_led[1]),          .O(GPIO_LED4));
+//OBUF  LED3_PIN           (.I(led_cnt[19]),          .O(GPIO_LED4));
 OBUF  LED2_PIN           (.I(omsp1_led[0]),          .O(GPIO_LED3));
 OBUF  LED1_PIN           (.I(omsp0_led[1]),          .O(GPIO_LED2));
 OBUF  LED0_PIN           (.I(omsp0_led[0]),          .O(GPIO_LED1));

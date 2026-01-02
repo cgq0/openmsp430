@@ -40,17 +40,14 @@ fi
 ###############################################################################
 
 # Move to the XFLOW workspace
-cd ./WORK
+cd ./work
 
 # Copy bitstream in working directory
 cp -f ../bitstreams/$1.bit .
 
-# Copy the impact script and update it
-cp ../scripts/impact_generate_prom_file.batch ./impact_generate_prom_file.batch
-sed -i "s/BITSTREAM_NAME/$1/g"  ./impact_generate_prom_file.batch
-
+echo "write_cfgmem -format mcs -interface spix4 -size 32 -loadbit \"up 0x0 $1.bit\" -file $1.mcs" > ./generate_prom_file.tcl
 # Create PROM image
-impact -batch ./impact_generate_prom_file.batch
+vivado -mode batch -source ./generate_prom_file.tcl -nojournal -nolog
 
 # Copy new PROM image in the proper directory
 cp -f ./$1.mcs ../bitstreams

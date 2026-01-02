@@ -63,13 +63,31 @@ launch_runs impl_1 -to_step write_bitstream -jobs 8
 wait_on_run impl_1
 
 open_run impl_1
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
 # Write bitstream (force overwrite)
 write_bitstream -force ${proj_name}.bit
 
-# print BRAM usage report
-
-set str [get_cells -hierarchical -filter { PRIMITIVE_TYPE =~ BMEM.bram.* }]
-puts $str
+# print BRAM usage report: list each BRAM cell and its physical location, write CSV
+set cells [get_cells -hierarchical -filter { PRIMITIVE_TYPE =~ BMEM.bram.* }]
+set report_file "${proj_name}_bram_report.csv"
+set fh [open $report_file w]
+puts $fh "cell,LOC,BEL"
+if {[llength $cells] == 0} {
+    puts "BRAM cells: none"
+    puts "Wrote BRAM report to $report_file (empty)"
+} else {
+    puts "BRAM cells (one per line):"
+    foreach cell $cells {
+        set loc [get_property LOC $cell]
+        set bel [get_property BEL $cell]
+        if {$loc == ""} { set loc "N/A" }
+        if {$bel == ""} { set bel "N/A" }
+        puts $fh "$cell,$loc,$bel"
+        puts "$cell -> LOC=$loc BEL=$bel"
+    }
+    puts "Wrote BRAM report to $report_file"
+}
+close $fh
 #show_objects -name find_2 [get_cells -hierarchical -filter { PRIMITIVE_TYPE =~ BMEM.bram.* } ]
 #close_run impl_1
 # close project

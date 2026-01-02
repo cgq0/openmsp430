@@ -1,0 +1,7 @@
+*
+!*/
+!*.xci
+!*.xpr
+!.gitignore
+ip_user_files/
+managed_ip_project/*.cache/

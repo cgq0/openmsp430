@@ -74,8 +74,8 @@ fi
 
 # Update bitstream
 #data2mem -bm ../scripts/memory.bmm -bd $1.mem -bt openMSP430_fpga.bit -o b $1.bit
-updatemem --force -meminfo ../scripts/memory.mmi -data ../scripts/debug.mem -proc dummy -bit ./openMSP430_fpga.bit -out $1.bit
-#updatemem --force -meminfo ../scripts/memory.mmi -data $1.mem -proc dummy -bit ./openMSP430_fpga.bit -out $1.bit
+#updatemem --force -meminfo ../scripts/memory.mmi -data ../scripts/debug.mem -proc dummy -bit ./openMSP430_fpga.bit -out $1.bit
+updatemem --force -meminfo ../scripts/memory.mmi -data $1.mem -proc dummy -bit ./openMSP430_fpga.bit -out $1.bit
 # Copy new bitstream in the proper directory
 cp -f ./$1.bit ../bitstreams
 
