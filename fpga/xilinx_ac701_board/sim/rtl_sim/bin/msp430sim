@@ -57,6 +57,10 @@ if [[ $# -ne $EXPECTED_ARGS ]]; then
   exit 1
 fi
 
+if [ -z "$OMSP_SIMULATOR" ]; then
+    echo "OMSP_SIMULATOR environment variable not set, defaulting to 'isim'"
+    export OMSP_SIMULATOR="isim"
+fi
 
 ###############################################################################
 #                     Check if the required files exist                       #

@@ -2,6 +2,11 @@
 NAME            = leds
 OBJECTS         = main.o
 
+# Check that MSP430_GCC_HOME is defined (required when using msp430-elf)
+ifndef MSP430_GCC_HOME
+$(error MSP430_GCC_HOME is not defined. Please set MSP430_GCC_HOME to the MSP430 GCC toolchain root.)
+endif
+
 # Compiler performance option (-Os / -O2 / -O3)
 PORT_CFLAGS     = -O2
 

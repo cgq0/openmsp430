@@ -48,7 +48,7 @@ module  tb_openMSP430_fpga;
 //------------------------------
 
 // Clock & Reset
-reg               CLK_40MHz;
+reg               CLK_90MHz;
 reg               CLK_66MHz;
 reg               CLK_100MHz;
 reg               USER_RESET;
@@ -128,8 +128,8 @@ initial
 //------------------------------
 initial
   begin
-     CLK_40MHz = 1'b0;
-     forever #12.5 CLK_40MHz <= ~CLK_40MHz; // 40 MHz
+     CLK_90MHz = 1'b0;
+     forever #5.5 CLK_90MHz <= ~CLK_90MHz; // 90 MHz
   end
 
 initial
@@ -182,7 +182,7 @@ openMSP430_fpga dut (
      //   This is a Multi-I/O Flash.  Several pins
      //  have dual purposes depending on the mode.
      //----------------------------------------------
-     .SPI_SCK         (),
+     //.SPI_SCK         (),
      .SPI_CS_n        (),
      .SPI_MOSI_MISO0  (),
      .SPI_MISO_MISO1  (),
@@ -196,16 +196,15 @@ openMSP430_fpga dut (
      //   Y2: 66.667 MHz
      //   Y3: 100 MHz
      //----------------------------------------------
-     .USER_CLOCK      (CLK_40MHz),
-     .CLOCK_Y2        (CLK_66MHz),
-     .CLOCK_Y3        (CLK_100MHz),
+     .USER_CLOCK      (CLK_90MHz),
+    
 
      //----------------------------------------------
      // The following oscillator is not populated
      // in production but the footprint is compatible
      // with the Maxim DS1088LU
      //----------------------------------------------
-     .BACKUP_CLK      (1'b0),
+   
 
      //----------------------------------------------
      // User DIP Switch x4
@@ -233,111 +232,20 @@ openMSP430_fpga dut (
      // Texas Instruments CDCE913 programming port
      //----------------------------------------------
      .SCL             (),
-     .SDA             (),
+     .SDA             ()
 
      //----------------------------------------------
      // Micron MT46H32M16LFBF-5 LPDDR
      //----------------------------------------------
 
-     // Addresses
-     .LPDDR_A0        (),
-     .LPDDR_A1        (),
-     .LPDDR_A2        (),
-     .LPDDR_A3        (),
-     .LPDDR_A4        (),
-     .LPDDR_A5        (),
-     .LPDDR_A6        (),
-     .LPDDR_A7        (),
-     .LPDDR_A8        (),
-     .LPDDR_A9        (),
-     .LPDDR_A10       (),
-     .LPDDR_A11       (),
-     .LPDDR_A12       (),
-     .LPDDR_BA0       (),
-     .LPDDR_BA1       (),
-
-     // Data
-     .LPDDR_DQ0       (),
-     .LPDDR_DQ1       (),
-     .LPDDR_DQ2       (),
-     .LPDDR_DQ3       (),
-     .LPDDR_DQ4       (),
-     .LPDDR_DQ5       (),
-     .LPDDR_DQ6       (),
-     .LPDDR_DQ7       (),
-     .LPDDR_DQ8       (),
-     .LPDDR_DQ9       (),
-     .LPDDR_DQ10      (),
-     .LPDDR_DQ11      (),
-     .LPDDR_DQ12      (),
-     .LPDDR_DQ13      (),
-     .LPDDR_DQ14      (),
-     .LPDDR_DQ15      (),
-     .LPDDR_LDM       (),
-     .LPDDR_UDM       (),
-     .LPDDR_LDQS      (),
-     .LPDDR_UDQS      (),
-
-     // Clock
-     .LPDDR_CK_N      (),
-     .LPDDR_CK_P      (),
-     .LPDDR_CKE       (),
-
-     // Control
-     .LPDDR_CAS_n     (),
-     .LPDDR_RAS_n     (),
-     .LPDDR_WE_n      (),
-     .LPDDR_RZQ       (),
-
-     //----------------------------------------------
-     // National Semiconductor DP83848J 10/100 Ethernet PHY
-     //   Pull-ups on RXD are necessary to set the PHY AD to 11110b.
-     //   Must keep the PHY from defaulting to PHY AD = 00000b
-     //   because this is Isolate Mode
-     //----------------------------------------------
-     .ETH_COL         (1'b0),
-     .ETH_CRS         (1'b0),
-     .ETH_MDC         (),
-     .ETH_MDIO        (),
-     .ETH_RESET_n     (),
-     .ETH_RX_CLK      (1'b0),
-     .ETH_RX_D0       (1'b0),
-     .ETH_RX_D1       (1'b0),
-     .ETH_RX_D2       (1'b0),
-     .ETH_RX_D3       (1'b0),
-     .ETH_RX_DV       (1'b0),
-     .ETH_RX_ER       (1'b0),
-     .ETH_TX_CLK      (1'b0),
-     .ETH_TX_D0       (),
-     .ETH_TX_D1       (),
-     .ETH_TX_D2       (),
-     .ETH_TX_D3       (),
-     .ETH_TX_EN       (),
+     
 
      //----------------------------------------------
      // Peripheral Modules (PMODs) and GPIO
      //     https://www.digilentinc.com/PMODs
      //----------------------------------------------
 
-     // Connector J5
-     .PMOD1_P1        (PMOD1_P1),    // Serial Debug Interface TX
-     .PMOD1_P2        (),
-     .PMOD1_P3        (),
-     .PMOD1_P4        (PMOD1_P4),    // Serial Debug Interface RX
-     .PMOD1_P7        (),
-     .PMOD1_P8        (),
-     .PMOD1_P9        (),
-     .PMOD1_P10       (),
-
-     // Connector J4
-     .PMOD2_P1        (),
-     .PMOD2_P2        (),
-     .PMOD2_P3        (),
-     .PMOD2_P4        (),
-     .PMOD2_P7        (),
-     .PMOD2_P8        (),
-     .PMOD2_P9        (),
-     .PMOD2_P10       ()
+     
 );
 
 

@@ -31,10 +31,10 @@ cd work
 vivado -mode batch -source ../scripts/vivado_run.tcl -nojournal -nolog
 
 # Copy bitstream out
-if [ -f "./openMSP430_fpga/openMSP430_fpga.bit" ] ; then
-    mkdir -p ../../bitstreams
-    cp -f ./openMSP430_fpga/openMSP430_fpga.bit ../../bitstreams/
-    echo "Bitstream written to ../../bitstreams/openMSP430_fpga.bit"
+if [ -f "./openMSP430_fpga.bit" ] ; then
+    mkdir -p ../bitstreams
+    cp -f ./openMSP430_fpga.bit ../bitstreams/
+    echo "Bitstream written to ../bitstreams/openMSP430_fpga.bit"
 else
     echo "ERROR: bitstream not found; check Vivado output."
     exit 1

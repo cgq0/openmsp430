@@ -14,6 +14,8 @@ verilog work /opt/Xilinx/Vivado/2020.2/data/verilog/src/retarget/IBUFG.v
 verilog work /opt/Xilinx/Vivado/2020.2/data/verilog/src/unisims/BUFG.v
 verilog work /opt/Xilinx/Vivado/2020.2/data/verilog/src/unisims/OBUF.v
 verilog work /opt/Xilinx/Vivado/2020.2/data/verilog/src/unisims/IOBUF.v
+verilog work /opt/Xilinx/Vivado/2020.2/data/verilog/src/unisims/MMCME2_ADV.v
+verilog work ../../../rtl/verilog/vivado_ip/clk_wiz_0/clk_wiz_0_sim_netlist.v
 
 verilog work ../../../rtl/verilog/openMSP430_fpga.v
 verilog work ../../../rtl/verilog/omsp_system_0.v

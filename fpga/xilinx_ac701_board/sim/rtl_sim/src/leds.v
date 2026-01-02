@@ -9,23 +9,23 @@ initial
       $display(" ===============================================");
       $display("|                 START SIMULATION              |");
       $display(" ===============================================");
-      repeat(5) @(posedge CLK_40MHz);
+      repeat(5) @(posedge CLK_90MHz);
       stimulus_done = 0;
 
-      repeat(100) @(posedge CLK_40MHz);
+      repeat(100) @(posedge CLK_90MHz);
  //     PMOD1_P8 = 1;
-      repeat(500) @(posedge CLK_40MHz);
+      repeat(500) @(posedge CLK_90MHz);
  //     PMOD1_P8 = 0;
-      repeat(100) @(posedge CLK_40MHz);
+      repeat(100) @(posedge CLK_90MHz);
  //     PMOD1_P8 = 1;
       
 
-      repeat(500) @(posedge CLK_40MHz);
+      repeat(500) @(posedge CLK_90MHz);
       PMOD1_P4 = 0;
-      repeat(100) @(posedge CLK_40MHz);
+      repeat(100) @(posedge CLK_90MHz);
       PMOD1_P4 = 1;
       
-      repeat(500) @(posedge CLK_40MHz);
+      repeat(500) @(posedge CLK_90MHz);
 
 
 

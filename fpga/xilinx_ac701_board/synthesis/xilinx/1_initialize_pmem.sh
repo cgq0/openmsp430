@@ -62,7 +62,7 @@ echo "|  UPDATE FPGA BITSTREAM"
 echo " -----------------------------------------------"
 echo ""
 
-cd ./WORK
+cd ./work
 
 # Generate memory file
 if command -v msp430-elf-gcc >/dev/null; then
@@ -73,8 +73,9 @@ fi
 ../scripts/ihex2mem.tcl -ihex $1.ihex -out $1.mem -mem_size 16384
 
 # Update bitstream
-data2mem -bm ../scripts/memory.bmm -bd $1.mem -bt openMSP430_fpga.bit -o b $1.bit
-
+#data2mem -bm ../scripts/memory.bmm -bd $1.mem -bt openMSP430_fpga.bit -o b $1.bit
+updatemem --force -meminfo ../scripts/memory.mmi -data ../scripts/debug.mem -proc dummy -bit ./openMSP430_fpga.bit -out $1.bit
+#updatemem --force -meminfo ../scripts/memory.mmi -data $1.mem -proc dummy -bit ./openMSP430_fpga.bit -out $1.bit
 # Copy new bitstream in the proper directory
 cp -f ./$1.bit ../bitstreams
 

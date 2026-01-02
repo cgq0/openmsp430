@@ -43,11 +43,6 @@
 ../../../rtl/verilog/io_mux.v
 // ../../../rtl/verilog/driver_7segment.v
 ../../../rtl/verilog/omsp_uart.v
-../../../rtl/verilog/coregen/ram_16x1k_sp.v
-../../../rtl/verilog/coregen/ram_16x1k_dp.v
-../../../rtl/verilog/coregen/ram_16x8k_dp.v
-../../../rtl/verilog/coregen_chipscope/chipscope_ila.v
-../../../rtl/verilog/coregen_chipscope/chipscope_icon.v
 
 //=============================================================================
 // openMSP430
@@ -77,8 +72,8 @@
 ../../../rtl/verilog/openmsp430/periph/omsp_gpio.v
 ../../../rtl/verilog/openmsp430/periph/omsp_timerA.v
 
-../../../rtl/verilog/coregen/ram_16x1k_sp.ngc 
-../../../rtl/verilog/coregen/ram_16x1k_dp.ngc
-../../../rtl/verilog/coregen/ram_16x8k_dp.ngc
-../../../rtl/verilog/coregen_chipscope/chipscope_icon.ngc
-../../../rtl/verilog/coregen_chipscope/chipscope_ila.ngc
+../../../rtl/verilog/vivado_ip/ram_16x1k_sp/ram_16x1k_sp.xci 
+../../../rtl/verilog/vivado_ip/ram_16x1k_dp/ram_16x1k_dp.xci
+../../../rtl/verilog/vivado_ip/ram_16x8k_dp/ram_16x8k_dp.xci
+../../../rtl/verilog/vivado_ip/clk_wiz_0/clk_wiz_0.xci
+

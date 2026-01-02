@@ -17,3 +17,12 @@ WORK
 *.key
 *.ihex
 *.map
+xelab.pb
+xvlog.pb
+.Xil
+*.jou
+xsim.dir
+webtalk*
+vivado_pid*
+*.wcfg
+*.wdb

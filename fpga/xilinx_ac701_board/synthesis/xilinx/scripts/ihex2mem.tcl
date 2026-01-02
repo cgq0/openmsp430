@@ -141,7 +141,7 @@ while {[gets $f_ihex line] >= 0} {
 }
 close $f_ihex
 
-
+puts -nonewline $f_out "@0000"
 # Writing memory array to file
 for {set i 0} {$i <= $num_word} {incr i} { 
 
@@ -149,10 +149,10 @@ for {set i 0} {$i <= $num_word} {incr i} {
 #	puts -nonewline $f_out "\n@[format "%04x" $i] "
 	puts -nonewline $f_out "\n"
     }
-    puts -nonewline $f_out " [format "%02s" $mem_arr($i) ]"
+    puts -nonewline $f_out "[format "%02s" $mem_arr($i) ]"
 }
 
-puts  $f_out "\n"
+#puts  $f_out "\n"
 
 if { "$out"!="-"} {
   close $f_out

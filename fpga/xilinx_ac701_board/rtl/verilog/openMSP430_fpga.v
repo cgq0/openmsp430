@@ -47,7 +47,7 @@ module openMSP430_fpga (
      //   This is a Multi-I/O Flash.  Several pins
      //  have dual purposes depending on the mode.
      //----------------------------------------------
-     SPI_SCK,
+     //SPI_SCK,
      SPI_CS_n,
      SPI_MOSI_MISO0,
      SPI_MISO_MISO1,
@@ -61,16 +61,7 @@ module openMSP430_fpga (
      //   Y2: 66.667 MHz
      //   Y3: 100 MHz
      //----------------------------------------------
-     USER_CLOCK,
-     CLOCK_Y2,
-     CLOCK_Y3,
-
-     //----------------------------------------------
-     // The following oscillator is not populated
-     // in production but the footprint is compatible
-     // with the Maxim DS1088LU
-     //----------------------------------------------
-     BACKUP_CLK,
+     USER_CLOCK,  
 
      //----------------------------------------------
      // User DIP Switch x4
@@ -98,111 +89,7 @@ module openMSP430_fpga (
      // Texas Instruments CDCE913 programming port
      //----------------------------------------------
      SCL,
-     SDA,
-
-     //----------------------------------------------
-     // Micron MT46H32M16LFBF-5 LPDDR
-     //----------------------------------------------
-
-     // Addresses
-     LPDDR_A0,
-     LPDDR_A1,
-     LPDDR_A2,
-     LPDDR_A3,
-     LPDDR_A4,
-     LPDDR_A5,
-     LPDDR_A6,
-     LPDDR_A7,
-     LPDDR_A8,
-     LPDDR_A9,
-     LPDDR_A10,
-     LPDDR_A11,
-     LPDDR_A12,
-     LPDDR_BA0,
-     LPDDR_BA1,
-
-     // Data
-     LPDDR_DQ0,
-     LPDDR_DQ1,
-     LPDDR_DQ2,
-     LPDDR_DQ3,
-     LPDDR_DQ4,
-     LPDDR_DQ5,
-     LPDDR_DQ6,
-     LPDDR_DQ7,
-     LPDDR_DQ8,
-     LPDDR_DQ9,
-     LPDDR_DQ10,
-     LPDDR_DQ11,
-     LPDDR_DQ12,
-     LPDDR_DQ13,
-     LPDDR_DQ14,
-     LPDDR_DQ15,
-     LPDDR_LDM,
-     LPDDR_UDM,
-     LPDDR_LDQS,
-     LPDDR_UDQS,
-
-     // Clock
-     LPDDR_CK_N,
-     LPDDR_CK_P,
-     LPDDR_CKE,
-
-     // Control
-     LPDDR_CAS_n,
-     LPDDR_RAS_n,
-     LPDDR_WE_n,
-     LPDDR_RZQ,
-
-     //----------------------------------------------
-     // National Semiconductor DP83848J 10/100 Ethernet PHY
-     //   Pull-ups on RXD are necessary to set the PHY AD to 11110b.
-     //   Must keep the PHY from defaulting to PHY AD = 00000b
-     //   because this is Isolate Mode
-     //----------------------------------------------
-     ETH_COL,
-     ETH_CRS,
-     ETH_MDC,
-     ETH_MDIO,
-     ETH_RESET_n,
-     ETH_RX_CLK,
-     ETH_RX_D0,
-     ETH_RX_D1,
-     ETH_RX_D2,
-     ETH_RX_D3,
-     ETH_RX_DV,
-     ETH_RX_ER,
-     ETH_TX_CLK,
-     ETH_TX_D0,
-     ETH_TX_D1,
-     ETH_TX_D2,
-     ETH_TX_D3,
-     ETH_TX_EN,
-
-     //----------------------------------------------
-     // Peripheral Modules (PMODs) and GPIO
-     //     https://www.digilentinc.com/PMODs
-     //----------------------------------------------
-
-     // Connector J5
-     PMOD1_P1,
-     PMOD1_P2,
-     PMOD1_P3,
-     PMOD1_P4,
-     PMOD1_P7,
-     PMOD1_P8,
-     PMOD1_P9,
-     PMOD1_P10,
-
-     // Connector J4
-     PMOD2_P1,
-     PMOD2_P2,
-     PMOD2_P3,
-     PMOD2_P4,
-     PMOD2_P7,
-     PMOD2_P8,
-     PMOD2_P9,
-     PMOD2_P10
+     SDA     
 );
 
 //----------------------------------------------
@@ -215,7 +102,7 @@ input    USER_RESET;
 //   This is a Multi-I/O Flash.  Several pins
 //  have dual purposes depending on the mode.
 //----------------------------------------------
-output   SPI_SCK;
+//output   SPI_SCK;
 output   SPI_CS_n;
 inout    SPI_MOSI_MISO0;
 inout    SPI_MISO_MISO1;
@@ -230,15 +117,6 @@ output   SPI_HOLDn_MISO3;
 //   Y3: 100 MHz
 //----------------------------------------------
 input    USER_CLOCK;
-input    CLOCK_Y2;
-input    CLOCK_Y3;
-
-//----------------------------------------------
-// The following oscillator is not populated
-// in production but the footprint is compatible
-// with the Maxim DS1088LU
-//----------------------------------------------
-input    BACKUP_CLK;
 
 //----------------------------------------------
 // User DIP Switch x4
@@ -263,114 +141,11 @@ input    USB_RS232_RXD;
 output   USB_RS232_TXD;
 
 //----------------------------------------------
-// Texas Instruments CDCE913 programming port
+// SCL----PMOD0
+// SDA----PMOD1
 //----------------------------------------------
 output   SCL;
 inout    SDA;
-
-//----------------------------------------------
-// Micron MT46H32M16LFBF-5 LPDDR
-//----------------------------------------------
-
-// Addresses
-output   LPDDR_A0;
-output   LPDDR_A1;
-output   LPDDR_A2;
-output   LPDDR_A3;
-output   LPDDR_A4;
-output   LPDDR_A5;
-output   LPDDR_A6;
-output   LPDDR_A7;
-output   LPDDR_A8;
-output   LPDDR_A9;
-output   LPDDR_A10;
-output   LPDDR_A11;
-output   LPDDR_A12;
-output   LPDDR_BA0;
-output   LPDDR_BA1;
-
-// Data
-inout    LPDDR_DQ0;
-inout    LPDDR_DQ1;
-inout    LPDDR_DQ2;
-inout    LPDDR_DQ3;
-inout    LPDDR_DQ4;
-inout    LPDDR_DQ5;
-inout    LPDDR_DQ6;
-inout    LPDDR_DQ7;
-inout    LPDDR_DQ8;
-inout    LPDDR_DQ9;
-inout    LPDDR_DQ10;
-inout    LPDDR_DQ11;
-inout    LPDDR_DQ12;
-inout    LPDDR_DQ13;
-inout    LPDDR_DQ14;
-inout    LPDDR_DQ15;
-output   LPDDR_LDM;
-output   LPDDR_UDM;
-inout    LPDDR_LDQS;
-inout    LPDDR_UDQS;
-
-// Clock
-output   LPDDR_CK_N;
-output   LPDDR_CK_P;
-output   LPDDR_CKE;
-
-// Control
-output   LPDDR_CAS_n;
-output   LPDDR_RAS_n;
-output   LPDDR_WE_n;
-inout    LPDDR_RZQ;
-
-//----------------------------------------------
-// National Semiconductor DP83848J 10/100 Ethernet PHY
-//   Pull-ups on RXD are necessary to set the PHY AD to 11110b.
-//   Must keep the PHY from defaulting to PHY AD = 00000b
-//   because this is Isolate Mode
-//----------------------------------------------
-input    ETH_COL;
-input    ETH_CRS;
-output   ETH_MDC;
-inout    ETH_MDIO;
-output   ETH_RESET_n;
-input    ETH_RX_CLK;
-input    ETH_RX_D0;
-input    ETH_RX_D1;
-input    ETH_RX_D2;
-input    ETH_RX_D3;
-input    ETH_RX_DV;
-input    ETH_RX_ER;
-input    ETH_TX_CLK;
-output   ETH_TX_D0;
-output   ETH_TX_D1;
-output   ETH_TX_D2;
-output   ETH_TX_D3;
-output   ETH_TX_EN;
-
-//----------------------------------------------
-// Peripheral Modules (PMODs) and GPIO
-//     https://www.digilentinc.com/PMODs
-//----------------------------------------------
-
-// Connector J5
-inout    PMOD1_P1;
-inout    PMOD1_P2;
-inout    PMOD1_P3;
-input    PMOD1_P4;
-inout    PMOD1_P7;
-inout    PMOD1_P8;
-inout    PMOD1_P9;
-inout    PMOD1_P10;
-
-// Connector J4
-inout    PMOD2_P1;
-inout    PMOD2_P2;
-inout    PMOD2_P3;
-inout    PMOD2_P4;
-inout    PMOD2_P7;
-inout    PMOD2_P8;
-inout    PMOD2_P9;
-inout    PMOD2_P10;
 
 
 //=============================================================================
@@ -378,16 +153,11 @@ inout    PMOD2_P10;
 //=============================================================================
 
 // Clock generation
-wire               clk_40mhz;
 wire               dcm_locked;
-wire               dcm_clkfx;
-wire               dcm_clk0;
-wire               dcm_clkfb;
 wire               dco_clk;
 
 // Reset generation
 wire               reset_pin;
-wire               reset_pin_n;
 wire               reset_n;
 
 // Debug interface
@@ -422,17 +192,20 @@ wire        [15:0] omsp1_dmem_dout_dp;
 reg                omsp1_dmem_dout_sel;
 
 // Program memory
-wire [`PMEM_MSB:0] omsp0_pmem_addr;
-wire               omsp0_pmem_cen;
+(*mark_debug="true"*)  wire [`PMEM_MSB:0] omsp0_pmem_addr;
+(*mark_debug="true"*)  wire               omsp0_pmem_cen;
 wire        [15:0] omsp0_pmem_din;
 wire         [1:0] omsp0_pmem_wen;
-wire        [15:0] omsp0_pmem_dout;
+(*mark_debug="true"*)  wire        [15:0] omsp0_pmem_dout;
 
-wire [`PMEM_MSB:0] omsp1_pmem_addr;
-wire               omsp1_pmem_cen;
+(*mark_debug="true"*)  wire [`PMEM_MSB:0] omsp1_pmem_addr;
+(*mark_debug="true"*)  wire               omsp1_pmem_cen;
 wire        [15:0] omsp1_pmem_din;
 wire         [1:0] omsp1_pmem_wen;
-wire        [15:0] omsp1_pmem_dout;
+(*mark_debug="true"*)  wire        [15:0] omsp1_pmem_dout;
+// Read-address counter for PMEM port B (used to sequentially read all contents)
+(*mark_debug="true"*) reg [`PMEM_MSB:0] pmem_read_addr_b;
+(*mark_debug="true"*) reg pmem_read_enb;
 
 // UART
 wire               omsp0_uart_rxd;
@@ -450,10 +223,9 @@ wire         [1:0] omsp1_led;
 
 // Reset input buffer
 IBUF   ibuf_reset_n   (.O(reset_pin), .I(USER_RESET));
-assign reset_pin_n = ~reset_pin;
 
 // Release the reset only, if the DCM is locked
-assign  reset_n = reset_pin_n & dcm_locked;
+assign  reset_n =  dcm_locked;
 
 // Top level reset generation
 wire dco_rst;
@@ -464,61 +236,12 @@ omsp_sync_reset sync_reset_dco (.rst_s (dco_rst), .clk(dco_clk), .rst_a(!reset_n
 // 3)  CLOCK GENERATION
 //=============================================================================
 
-// Input buffers
-//------------------------
-IBUFG ibuf_clk_main   (.O(clk_40mhz),    .I(USER_CLOCK));
-IBUFG ibuf_clk_y2     (.O(),             .I(CLOCK_Y2));
-IBUFG ibuf_clk_y3     (.O(),             .I(CLOCK_Y3));
-IBUFG ibuf_clk_bkup   (.O(),             .I(BACKUP_CLK));
-
-
-// Digital Clock Manager
-//------------------------
-DCM_SP #(.CLKFX_MULTIPLY(7),
-	 .CLKFX_DIVIDE(10),
-	 .CLKIN_PERIOD(25.000)) dcm_inst (
-
-// OUTPUTs
-    .CLKDV        (),
-    .CLKFX        (dcm_clkfx),
-    .CLKFX180     (),
-    .LOCKED       (dcm_locked),
-    .PSDONE       (),
-
-    .STATUS       (),
-
-    .CLK0         (dcm_clk0),
-    .CLK180       (),
-    .CLK270       (),
-    .CLK2X        (),
-    .CLK2X180     (),
-    .CLK90        (),
-
-// INPUTs
-    .CLKFB        (dcm_clkfb),
-    .CLKIN        (clk_40mhz),
-    .DSSEN        (1'b0),
-
-    .PSCLK        (1'b0),
-    .PSEN         (1'b0),
-    .PSINCDEC     (1'b0),
-    .RST          (reset_pin)
+clk_wiz_0 u_mmcm(
+    .clk_in1(USER_CLOCK),      // input clk_in1
+    .reset(reset_pin),          // input reset
+    .locked(dcm_locked),        // output locked
+    .clk_out1(dco_clk)         // output clk_out1
 );
-
-BUFG CLK0_BUFG_INST (
-    .I(dcm_clk0),
-    .O(dcm_clkfb)
-);
-
-//synthesis translate_off
-defparam dcm_inst.CLKFX_MULTIPLY  = 7;
-defparam dcm_inst.CLKFX_DIVIDE    = 10;
-defparam dcm_inst.CLKIN_PERIOD    = 25.000;
-//synthesis translate_on
-
-// Clock buffers
-//------------------------
-BUFG  buf_sys_clock  (.O(dco_clk), .I(dcm_clkfx));
 
 
 //=============================================================================
@@ -660,6 +383,8 @@ ram_16x1k_dp ram_16x1k_dp_dmem_shared (
 );
 
 // Shared Program Memory
+`define DEBUG_PMEM
+`ifndef DEBUG_PMEM
 ram_16x8k_dp ram_16x8k_dp_pmem_shared (
     .clka           ( dco_clk),
     .ena            (~omsp0_pmem_cen),
@@ -674,6 +399,38 @@ ram_16x8k_dp ram_16x8k_dp_pmem_shared (
     .dinb           ( omsp1_pmem_din),
     .doutb          ( omsp1_pmem_dout)
 );
+`else
+
+ram_16x8k_dp ram_16x8k_dp_pmem_shared (
+    .clka           ( dco_clk),
+    .ena            (~omsp0_pmem_cen),
+    //.wea            (~omsp0_pmem_wen),
+    .wea            (2'b00),
+    .addra          ( omsp0_pmem_addr),
+    .dina           ( 16'haa55),
+    .douta          ( omsp0_pmem_dout),
+    .clkb           ( dco_clk),
+    .enb            ( pmem_read_enb ),
+    .web            ( 2'b00 ),
+    .addrb          ( pmem_read_addr_b ),
+    .dinb           ( 16'haa55),
+    .doutb          ( omsp1_pmem_dout)
+);
+
+// Generate an enable that pulses every other clock and increment address on that pulse
+always @ (posedge dco_clk or posedge dco_rst)
+begin
+    if (dco_rst) begin
+        pmem_read_addr_b <= {(`PMEM_MSB+1){1'b0}};
+        pmem_read_enb    <= 1'b0;
+    end
+    else begin
+        pmem_read_enb <= ~pmem_read_enb; // toggle: read every other clock
+        if (pmem_read_enb)
+            pmem_read_addr_b <= pmem_read_addr_b + 1'b1;
+    end
+end
+`endif
 
 
 //=============================================================================
@@ -685,7 +442,7 @@ ram_16x8k_dp ram_16x8k_dp_pmem_shared (
 //   This is a Multi-I/O Flash.  Several pins
 //  have dual purposes depending on the mode.
 //----------------------------------------------
-OBUF  SPI_CLK_PIN        (.I(1'b0),                  .O(SPI_SCK));
+//OBUF  SPI_CLK_PIN        (.I(1'b0),                  .O(SPI_SCK));
 OBUF  SPI_CSN_PIN        (.I(1'b1),                  .O(SPI_CS_n));
 IOBUF SPI_MOSI_MISO0_PIN (.T(1'b0), .I(1'b0), .O(),  .IO(SPI_MOSI_MISO0));
 IOBUF SPI_MISO_MISO1_PIN (.T(1'b0), .I(1'b0), .O(),  .IO(SPI_MISO_MISO1));
@@ -703,7 +460,14 @@ IBUF  SW0_PIN            (.O(omsp_switch[0]),        .I(GPIO_DIP1));
 //----------------------------------------------
 // User LEDs
 //----------------------------------------------
-OBUF  LED3_PIN           (.I(omsp1_led[1]),          .O(GPIO_LED4));
+reg[19:0] led_cnt;
+always @ (posedge dco_clk or posedge dco_rst)
+    if (dco_rst)       led_cnt <=  10'h000;
+    else               led_cnt <=  led_cnt + 10'h001;
+    
+
+//OBUF  LED3_PIN           (.I(omsp1_led[1]),          .O(GPIO_LED4));
+OBUF  LED3_PIN           (.I(led_cnt[19]),          .O(GPIO_LED4));
 OBUF  LED2_PIN           (.I(omsp1_led[0]),          .O(GPIO_LED3));
 OBUF  LED1_PIN           (.I(omsp0_led[1]),          .O(GPIO_LED2));
 OBUF  LED0_PIN           (.I(omsp0_led[0]),          .O(GPIO_LED1));
@@ -714,100 +478,25 @@ OBUF  LED0_PIN           (.I(omsp0_led[0]),          .O(GPIO_LED1));
 IBUF  UART_RXD_PIN       (.O(omsp0_uart_rxd),        .I(USB_RS232_RXD));
 OBUF  UART_TXD_PIN       (.I(omsp0_uart_txd),        .O(USB_RS232_TXD));
 
+assign omsp_dbg_i2c_sda_out = omsp0_dbg_i2c_sda_out & omsp1_dbg_i2c_sda_out;
 //----------------------------------------------
 // Texas Instruments CDCE913 programming port
 //----------------------------------------------
-IOBUF SCL_PIN            (.T(1'b0), .I(1'b1), .O(),  .IO(SCL));
-IOBUF SDA_PIN            (.T(1'b0), .I(1'b1), .O(),  .IO(SDA));
-
-//----------------------------------------------
-// Micron MT46H32M16LFBF-5 LPDDR
-//----------------------------------------------
-
-// Addresses
-OBUF  LPDDR_A0_PIN       (.I(1'b0),                  .O(LPDDR_A0));
-OBUF  LPDDR_A1_PIN       (.I(1'b0),                  .O(LPDDR_A1));
-OBUF  LPDDR_A2_PIN       (.I(1'b0),                  .O(LPDDR_A2));
-OBUF  LPDDR_A3_PIN       (.I(1'b0),                  .O(LPDDR_A3));
-OBUF  LPDDR_A4_PIN       (.I(1'b0),                  .O(LPDDR_A4));
-OBUF  LPDDR_A5_PIN       (.I(1'b0),                  .O(LPDDR_A5));
-OBUF  LPDDR_A6_PIN       (.I(1'b0),                  .O(LPDDR_A6));
-OBUF  LPDDR_A7_PIN       (.I(1'b0),                  .O(LPDDR_A7));
-OBUF  LPDDR_A8_PIN       (.I(1'b0),                  .O(LPDDR_A8));
-OBUF  LPDDR_A9_PIN       (.I(1'b0),                  .O(LPDDR_A9));
-OBUF  LPDDR_A10_PIN      (.I(1'b0),                  .O(LPDDR_A10));
-OBUF  LPDDR_A11_PIN      (.I(1'b0),                  .O(LPDDR_A11));
-OBUF  LPDDR_A12_PIN      (.I(1'b0),                  .O(LPDDR_A12));
-OBUF  LPDDR_BA0_PIN      (.I(1'b0),                  .O(LPDDR_BA0));
-OBUF  LPDDR_BA1_PIN      (.I(1'b0),                  .O(LPDDR_BA1));
-
-// Data
-IOBUF LPDDR_DQ0_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ0));
-IOBUF LPDDR_DQ1_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ1));
-IOBUF LPDDR_DQ2_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ2));
-IOBUF LPDDR_DQ3_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ3));
-IOBUF LPDDR_DQ4_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ4));
-IOBUF LPDDR_DQ5_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ5));
-IOBUF LPDDR_DQ6_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ6));
-IOBUF LPDDR_DQ7_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ7));
-IOBUF LPDDR_DQ8_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ8));
-IOBUF LPDDR_DQ9_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ9));
-IOBUF LPDDR_DQ10_PIN     (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ10));
-IOBUF LPDDR_DQ11_PIN     (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ11));
-IOBUF LPDDR_DQ12_PIN     (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ12));
-IOBUF LPDDR_DQ13_PIN     (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ13));
-IOBUF LPDDR_DQ14_PIN     (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ14));
-IOBUF LPDDR_DQ15_PIN     (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_DQ15));
-OBUF  LPDDR_LDM_PIN      (.I(1'b0),                  .O(LPDDR_LDM));
-OBUF  LPDDR_UDM_PIN      (.I(1'b0),                  .O(LPDDR_UDM));
-IOBUF LPDDR_LDQS_PIN     (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_LDQS));
-IOBUF LPDDR_UDQS_PIN     (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_UDQS));
-
-// Clock
-IOBUF LPDDR_CK_N_PIN     (.T(1'b1), .I(1'b0), .O(),  .IO(LPDDR_CK_N));
-IOBUF LPDDR_CK_P_PIN     (.T(1'b1), .I(1'b1), .O(),  .IO(LPDDR_CK_P));
-OBUF  LPDDR_CKE_PIN      (.I(1'b0),                  .O(LPDDR_CKE));
-
-// Control
-OBUF  LPDDR_CAS_N_PIN    (.I(1'b1),                  .O(LPDDR_CAS_n));
-OBUF  LPDDR_RAS_N_PIN    (.I(1'b1),                  .O(LPDDR_RAS_n));
-OBUF  LPDDR_WE_N_PIN     (.I(1'b1),                  .O(LPDDR_WE_n));
-IOBUF LPDDR_RZQ_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(LPDDR_RZQ));
+//IOBUF SCL_PIN            (.T(1'b0), .I(1'b1), .O(),  .IO(SCL));
+IBUF  SCL_PIN       (  .O(SCL),     .I (omsp_dbg_i2c_scl));
+IOBUF SDA_PIN            (.T(omsp_dbg_i2c_sda_out), .I(1'b0), .O(omsp_dbg_i2c_sda_in),  .IO(SDA));
 
 
-//----------------------------------------------
-// National Semiconductor DP83848J 10/100 Ethernet PHY
-//   Pull-ups on RXD are necessary to set the PHY AD to 11110b.
-//   Must keep the PHY from defaulting to PHY AD = 00000b
-//   because this is Isolate Mode
-//----------------------------------------------
-IBUF  ETH_COL_PIN        (.O(),                      .I(ETH_COL));
-IBUF  ETH_CRS_PIN        (.O(),                      .I(ETH_CRS));
-OBUF  ETH_MDC_PIN        (.I(1'b0),                  .O(ETH_MDC));
-IOBUF ETH_MDIO_PIN       (.T(1'b0), .I(1'b0), .O(),  .IO(ETH_MDIO));
-OBUF  ETH_RESET_N_PIN    (.I(1'b1),                  .O(ETH_RESET_n));
-IBUF  ETH_RX_CLK_PIN     (.O(),                      .I(ETH_RX_CLK));
-IBUF  ETH_RX_D0_PIN      (.O(),                      .I(ETH_RX_D0));
-IBUF  ETH_RX_D1_PIN      (.O(),                      .I(ETH_RX_D1));
-IBUF  ETH_RX_D2_PIN      (.O(),                      .I(ETH_RX_D2));
-IBUF  ETH_RX_D3_PIN      (.O(),                      .I(ETH_RX_D3));
-IBUF  ETH_RX_DV_PIN      (.O(),                      .I(ETH_RX_DV));
-IBUF  ETH_RX_ER_PIN      (.O(),                      .I(ETH_RX_ER));
-IBUF  ETH_TX_CLK_PIN     (.O(),                      .I(ETH_TX_CLK));
-OBUF  ETH_TX_D0_PIN      (.I(1'b0),                  .O(ETH_TX_D0));
-OBUF  ETH_TX_D1_PIN      (.I(1'b0),                  .O(ETH_TX_D1));
-OBUF  ETH_TX_D2_PIN      (.I(1'b0),                  .O(ETH_TX_D2));
-OBUF  ETH_TX_D3_PIN      (.I(1'b0),                  .O(ETH_TX_D3));
-OBUF  ETH_TX_EN_PIN      (.I(1'b0),                  .O(ETH_TX_EN));
 
 //----------------------------------------------
 // Peripheral Modules (PMODs) and GPIO
 //     https://www.digilentinc.com/PMODs
 //----------------------------------------------
 
-assign omsp_dbg_i2c_sda_out = omsp0_dbg_i2c_sda_out & omsp1_dbg_i2c_sda_out;
+
 
 // Connector J5
+/*
 IOBUF PMOD1_P1_PIN       (.T(1'b0),                  .I(1'b0), .O(),                     .IO(PMOD1_P1));
 IOBUF PMOD1_P2_PIN       (.T(1'b0),                  .I(1'b0), .O(),                     .IO(PMOD1_P2));
 IOBUF PMOD1_P3_PIN       (.T(omsp_dbg_i2c_sda_out),  .I(1'b0), .O(omsp_dbg_i2c_sda_in),  .IO(PMOD1_P3));
@@ -816,16 +505,8 @@ IOBUF PMOD1_P7_PIN       (.T(1'b0),                  .I(1'b0), .O(),            
 IBUF  PMOD1_P8_PIN       (                                     .O(),                     .I (PMOD1_P8));
 IOBUF PMOD1_P9_PIN       (.T(1'b0),                  .I(1'b0), .O(),                     .IO(PMOD1_P9));
 IOBUF PMOD1_P10_PIN      (.T(1'b0),                  .I(1'b0), .O(),                     .IO(PMOD1_P10));
+*/
 
-// Connector J4
-IOBUF PMOD2_P1_PIN       (.T(1'b0), .I(1'b0), .O(),  .IO(PMOD2_P1));
-IOBUF PMOD2_P2_PIN       (.T(1'b0), .I(1'b0), .O(),  .IO(PMOD2_P2));
-IOBUF PMOD2_P3_PIN       (.T(1'b0), .I(1'b0), .O(),  .IO(PMOD2_P3));
-IOBUF PMOD2_P4_PIN       (.T(1'b0), .I(1'b0), .O(),  .IO(PMOD2_P4));
-IOBUF PMOD2_P7_PIN       (.T(1'b0), .I(1'b0), .O(),  .IO(PMOD2_P7));
-IOBUF PMOD2_P8_PIN       (.T(1'b0), .I(1'b0), .O(),  .IO(PMOD2_P8));
-IOBUF PMOD2_P9_PIN       (.T(1'b0), .I(1'b0), .O(),  .IO(PMOD2_P9));
-IOBUF PMOD2_P10_PIN      (.T(1'b0), .I(1'b0), .O(),  .IO(PMOD2_P10));
 
 
 //=============================================================================

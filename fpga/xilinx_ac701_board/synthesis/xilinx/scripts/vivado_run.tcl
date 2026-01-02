@@ -55,15 +55,22 @@ if {[catch {set_property top openMSP430_fpga [get_filesets sources_1]}]} {
 }
 
 # Run synthesis
-launch_runs synth_1 -jobs 4
+launch_runs synth_1 -jobs 8
 wait_on_run synth_1
 
 # Run implementation
-launch_runs impl_1 -to_step write_bitstream -jobs 4
+launch_runs impl_1 -to_step write_bitstream -jobs 8
 wait_on_run impl_1
 
+open_run impl_1
 # Write bitstream (force overwrite)
 write_bitstream -force ${proj_name}.bit
 
+# print BRAM usage report
+
+set str [get_cells -hierarchical -filter { PRIMITIVE_TYPE =~ BMEM.bram.* }]
+puts $str
+#show_objects -name find_2 [get_cells -hierarchical -filter { PRIMITIVE_TYPE =~ BMEM.bram.* } ]
+#close_run impl_1
 # close project
-close_project -save
+close_project 
