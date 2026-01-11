@@ -44,7 +44,8 @@ cd ./work
 
 # Copy bitstream in working directory
 cp -f ../bitstreams/$1.bit .
-
+# Part number:"N25Q256A13ESF40G"
+# Supply voltage: 3.3V
 echo "write_cfgmem -format mcs -interface spix4 -size 32 -loadbit \"up 0x0 $1.bit\" -file $1.mcs" > ./generate_prom_file.tcl
 # Create PROM image
 vivado -mode batch -source ./generate_prom_file.tcl -nojournal -nolog

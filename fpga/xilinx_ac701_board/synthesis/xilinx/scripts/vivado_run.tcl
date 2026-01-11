@@ -63,7 +63,7 @@ launch_runs impl_1 -to_step write_bitstream -jobs 8
 wait_on_run impl_1
 
 open_run impl_1
-set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
+
 # Write bitstream (force overwrite)
 write_bitstream -force ${proj_name}.bit
 

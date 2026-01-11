@@ -142,49 +142,9 @@ set_property PULLUP true [get_ports SDA]
 #set_property bmm_info_memory_device {[ 12: 15][0:8191]} [get_cells ram_16x8k_dp_pmem_shared/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.TRUE_DP.SIMPLE_PRIM36.ram]
 
 
-
-
-
-
-
-connect_debug_port u_ila_0/probe4 [get_nets [list {pmem_read_addr_b[0]} {pmem_read_addr_b[1]} {pmem_read_addr_b[2]} {pmem_read_addr_b[3]} {pmem_read_addr_b[4]} {pmem_read_addr_b[5]} {pmem_read_addr_b[6]} {pmem_read_addr_b[7]} {pmem_read_addr_b[8]} {pmem_read_addr_b[9]} {pmem_read_addr_b[10]} {pmem_read_addr_b[11]} {pmem_read_addr_b[12]}]]
-connect_debug_port u_ila_0/probe7 [get_nets [list pmem_read_enb]]
-
-create_debug_core u_ila_0 ila
-set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
-set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
-set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
-set_property C_DATA_DEPTH 2048 [get_debug_cores u_ila_0]
-set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
-set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
-set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
-set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
-set_property port_width 1 [get_debug_ports u_ila_0/clk]
-connect_debug_port u_ila_0/clk [get_nets [list u_mmcm/inst/clk_out1]]
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
-set_property port_width 13 [get_debug_ports u_ila_0/probe0]
-connect_debug_port u_ila_0/probe0 [get_nets [list {omsp1_pmem_addr[0]} {omsp1_pmem_addr[1]} {omsp1_pmem_addr[2]} {omsp1_pmem_addr[3]} {omsp1_pmem_addr[4]} {omsp1_pmem_addr[5]} {omsp1_pmem_addr[6]} {omsp1_pmem_addr[7]} {omsp1_pmem_addr[8]} {omsp1_pmem_addr[9]} {omsp1_pmem_addr[10]} {omsp1_pmem_addr[11]} {omsp1_pmem_addr[12]}]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
-set_property port_width 16 [get_debug_ports u_ila_0/probe1]
-connect_debug_port u_ila_0/probe1 [get_nets [list {omsp1_pmem_dout[0]} {omsp1_pmem_dout[1]} {omsp1_pmem_dout[2]} {omsp1_pmem_dout[3]} {omsp1_pmem_dout[4]} {omsp1_pmem_dout[5]} {omsp1_pmem_dout[6]} {omsp1_pmem_dout[7]} {omsp1_pmem_dout[8]} {omsp1_pmem_dout[9]} {omsp1_pmem_dout[10]} {omsp1_pmem_dout[11]} {omsp1_pmem_dout[12]} {omsp1_pmem_dout[13]} {omsp1_pmem_dout[14]} {omsp1_pmem_dout[15]}]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
-set_property port_width 16 [get_debug_ports u_ila_0/probe2]
-connect_debug_port u_ila_0/probe2 [get_nets [list {omsp0_pmem_dout[0]} {omsp0_pmem_dout[1]} {omsp0_pmem_dout[2]} {omsp0_pmem_dout[3]} {omsp0_pmem_dout[4]} {omsp0_pmem_dout[5]} {omsp0_pmem_dout[6]} {omsp0_pmem_dout[7]} {omsp0_pmem_dout[8]} {omsp0_pmem_dout[9]} {omsp0_pmem_dout[10]} {omsp0_pmem_dout[11]} {omsp0_pmem_dout[12]} {omsp0_pmem_dout[13]} {omsp0_pmem_dout[14]} {omsp0_pmem_dout[15]}]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
-set_property port_width 13 [get_debug_ports u_ila_0/probe3]
-connect_debug_port u_ila_0/probe3 [get_nets [list {omsp0_pmem_addr[0]} {omsp0_pmem_addr[1]} {omsp0_pmem_addr[2]} {omsp0_pmem_addr[3]} {omsp0_pmem_addr[4]} {omsp0_pmem_addr[5]} {omsp0_pmem_addr[6]} {omsp0_pmem_addr[7]} {omsp0_pmem_addr[8]} {omsp0_pmem_addr[9]} {omsp0_pmem_addr[10]} {omsp0_pmem_addr[11]} {omsp0_pmem_addr[12]}]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
-set_property port_width 1 [get_debug_ports u_ila_0/probe4]
-connect_debug_port u_ila_0/probe4 [get_nets [list omsp0_pmem_cen]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe5]
-set_property port_width 1 [get_debug_ports u_ila_0/probe5]
-connect_debug_port u_ila_0/probe5 [get_nets [list omsp1_pmem_cen]]
-set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
-set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
-set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
-connect_debug_port dbg_hub/clk [get_nets dco_clk]
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
+set_property CONFIG_MODE SPIx4 [current_design]
+set_property BITSTREAM.CONFIG.CONFIGRATE 6 [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property CFGBVS VCCO [current_design]
+#set_property BITSTREAM.CONFIG.SPI_32BIT_ADDR YES [current_design]

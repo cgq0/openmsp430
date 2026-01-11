@@ -1,4 +1,4 @@
-# Project Name - Xilinx AC701 Support
+# Project Name - openMSP430 with Xilinx AC701 Support
 
 ## About this Fork
 I forked this repository to add dedicated support for the **Xilinx AC701** evaluation board.

@@ -192,17 +192,16 @@ wire        [15:0] omsp1_dmem_dout_dp;
 reg                omsp1_dmem_dout_sel;
 
 // Program memory
-(*mark_debug="true"*)  wire [`PMEM_MSB:0] omsp0_pmem_addr;
-(*mark_debug="true"*)  wire               omsp0_pmem_cen;
+wire [`PMEM_MSB:0] omsp0_pmem_addr;
+wire               omsp0_pmem_cen;
 wire        [15:0] omsp0_pmem_din;
 wire         [1:0] omsp0_pmem_wen;
-(*mark_debug="true"*)  wire        [15:0] omsp0_pmem_dout;
-
-(*mark_debug="true"*)  wire [`PMEM_MSB:0] omsp1_pmem_addr;
-(*mark_debug="true"*)  wire               omsp1_pmem_cen;
+wire        [15:0] omsp0_pmem_dout;
+wire [`PMEM_MSB:0] omsp1_pmem_addr;
+wire               omsp1_pmem_cen;
 wire        [15:0] omsp1_pmem_din;
 wire         [1:0] omsp1_pmem_wen;
-(*mark_debug="true"*)  wire        [15:0] omsp1_pmem_dout;
+wire        [15:0] omsp1_pmem_dout;
 // UART
 wire               omsp0_uart_rxd;
 wire               omsp0_uart_txd;
