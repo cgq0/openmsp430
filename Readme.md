@@ -10,10 +10,9 @@ I forked this repository to add dedicated support for the **Xilinx AC701** evalu
 ## To-Do List
 I am working on the following features to fully support the AC701 workflow:
 
-1.  **MCS File Generation:** Implement automated generation of `.mcs` files.
 2.  **Flash Programming:** Enable support for programming the onboard Flash memory.
 3.  **MMI Updates:** Automate the `.mmi` (Memory Map Info) file update process.
-4.  **Windows Support:** Ensure the entire build process works seamlessly on Windows.
+
 
 ---
 
