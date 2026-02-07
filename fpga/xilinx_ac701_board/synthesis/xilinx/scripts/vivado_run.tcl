@@ -54,6 +54,38 @@ if {[catch {set_property top openMSP430_fpga [get_filesets sources_1]}]} {
     puts "Warning: could not set top to 'openMSP430_fpga' automatically."
 }
 
+# Process all IP cores in the project
+puts "INFO: Processing IP cores..."
+set all_ips [get_ips]
+if {[llength $all_ips] > 0} {
+    foreach ip $all_ips {
+        set ip_name [get_property NAME $ip]
+        puts "INFO: Processing IP: $ip_name"
+        
+        # Check if IP is locked
+        set is_locked [get_property IS_LOCKED $ip]
+        if {$is_locked} {
+            puts "INFO: IP $ip_name is locked. Upgrading..."
+            upgrade_ip $ip
+            generate_target all $ip
+            export_ip_user_files -of_objects [get_ips $ip_name] -no_script -sync -force -quiet
+        } else {
+            # Check if IP has been generated
+            set is_generated [get_property IS_GENERATED $ip]
+            if {!$is_generated} {
+                puts "INFO: IP $ip_name needs to be generated. Implementing..."
+                generate_target all $ip
+            }
+        }
+    }
+    
+    # Synthesize IPs
+    puts "INFO: Synthesizing IP cores..."
+    synth_ip [get_ips]
+} else {
+    puts "INFO: No IP cores found in the project."
+}
+
 # Run synthesis
 launch_runs synth_1 -jobs 8
 wait_on_run synth_1
@@ -91,4 +123,4 @@ close $fh
 #show_objects -name find_2 [get_cells -hierarchical -filter { PRIMITIVE_TYPE =~ BMEM.bram.* } ]
 #close_run impl_1
 # close project
-close_project 
+close_project

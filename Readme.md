@@ -3,7 +3,7 @@
 ## About this Fork
 I forked this repository to add dedicated support for the **Xilinx AC701** evaluation board.
 
-* **Status:** Bitstream generation (`.bit`) is currently functional and verified.
+* **Status:** Prom file (`.mcs`)  generation is currently functional and verified.
 
 ---
 
@@ -41,5 +41,9 @@ The build process currently requires a **MinGW64** terminal. Follow these steps 
     ./1_initialize_pmem.sh
     ```
 
+5.  **Generate prom file (.mcs):**
+    ```bash
+    ./2_generate_prom_file.sh
+    ```
 
 
